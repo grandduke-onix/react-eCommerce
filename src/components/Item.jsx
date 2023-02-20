@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
-import AddIcon from "@mui/material/Add";
-import { RemoveIcon } from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart } from "../state";
 import { useNavigate } from "react-router-dom";
@@ -28,8 +28,8 @@ const Item = function (props) {
 		<Box width={props.width}>
 			<Box
 				position={"relative"}
-				onMouseOver={setIsHovered(true)}
-				onMouseOut={setIsHovered(false)}
+				onMouseOver={() => setIsHovered(true)}
+				onMouseOut={() => setIsHovered(false)}
 			>
 				<img
 					src={`http://localhost:1337${url}`}
@@ -40,7 +40,7 @@ const Item = function (props) {
 					style={{ cursor: "pointer" }}
 				/>
 				<Box
-					display={isHovered ? "box" : "none"}
+					display={isHovered ? "block" : "none"}
 					position={"absolute"}
 					bottom={"10%"}
 					left={"0"}
@@ -77,7 +77,7 @@ const Item = function (props) {
 
 			<Box mt={"3px"}>
 				<Typography variant="subtitle2" color={neutral.dark}>
-					{category.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase())}
+					{category}
 				</Typography>
 				<Typography>{name}</Typography>
 				<Typography fontWeight={"bold"}>${price}</Typography>
