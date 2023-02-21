@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import styled from "@emotion/styled";
 import { shades } from "../../theme";
-import { dercreaseCount, increaseCount, removeFromCart, setIsCartOpen } from "../../state";
+import { decreaseCount, increaseCount, removeFromCart, setIsCartOpen } from "../../state";
 
 const FlexBox = styled(Box)`
 	display: flex;
@@ -22,7 +22,7 @@ const CartMenu = function () {
 	const isCartOpen = useSelector(state => state.cart.isCartOpen);
 
 	const totalPrice = cart.reduce((total, item) => {
-		return total + item.count * item.attribute.price;
+		return total + item.count * item.attributes.price;
 	}, 0);
 
 	return (
@@ -59,7 +59,7 @@ const CartMenu = function () {
 					{/* Cart List */}
 					<Box>
 						{cart.map(item => (
-							<Box key={`${item.attribute.name}-${item.id}`}>
+							<Box key={`${item.attributes.name}-${item.id}`}>
 								<FlexBox p={"15px 0"}>
 									<Box flex={"1 1 40%"}>
 										<img
@@ -73,7 +73,7 @@ const CartMenu = function () {
 										{/* Item Name */}
 										<FlexBox mb={"5px"}>
 											<Typography fontWeight={"bold"}>
-												{item.attribute.name}
+												{item.attributes.name}
 											</Typography>
 											<IconButton
 												onClick={() =>
@@ -93,17 +93,17 @@ const CartMenu = function () {
 												border={`1px solid ${shades.neutral[500]}`}
 											>
 												<IconButton
-													onClick={dispatch(
-														dercreaseCount({ id: item.id })
-													)}
+													onClick={() =>
+														dispatch(decreaseCount({ id: item.id }))
+													}
 												>
 													<RemoveIcon />
 												</IconButton>
 												<Typography>{item.count}</Typography>
 												<IconButton
-													onClick={dispatch(
-														increaseCount({ id: item.id })
-													)}
+													onClick={() =>
+														dispatch(increaseCount({ id: item.id }))
+													}
 												>
 													<AddIcon />
 												</IconButton>
